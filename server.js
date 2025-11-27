@@ -15,6 +15,12 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/cuts', require('./routes/cuts'));
 
+app.get('/api/health', (req, res) => {
+  const states = ['disconnected', 'connected', 'connecting', 'disconnecting'];
+  const db = states[mongoose.connection.readyState] || 'unknown';
+  res.json({ status: 'ok', database: db, uptime: process.uptime(), timestamp: new Date().toISOString() });
+});
+
 // Database Connection
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI;
