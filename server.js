@@ -18,7 +18,7 @@ app.use('/api/cuts', require('./routes/cuts'));
 app.get('/api/health', (req, res) => {
   const states = ['disconnected', 'connected', 'connecting', 'disconnecting'];
   const db = states[mongoose.connection.readyState] || 'unknown';
-  res.json({ status: 'ok', database: db, uptime: process.uptime(), timestamp: new Date().toISOString() });
+  res.json({ status: 'ok', database: db, uptime: process.uptime(), timestamp: new Date().toISOString(), hasMongoUri: !!process.env.MONGO_URI, vercel: !!process.env.VERCEL });
 });
 
 app.get('/', (req, res) => {
