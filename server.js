@@ -21,6 +21,10 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', database: db, uptime: process.uptime(), timestamp: new Date().toISOString() });
 });
 
+app.get('/', (req, res) => {
+  res.send('Softbarber API running');
+});
+
 // Database Connection
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI;
